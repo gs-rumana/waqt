@@ -1,0 +1,106 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const steps = [
+  {
+    n: '01',
+    title: 'Install the extension',
+    body: 'Search for "Waqt" in the VS Code Extensions panel or install from the Marketplace. The extension activates automatically when VS Code starts.',
+  },
+  {
+    n: '02',
+    title: 'Open any file and start coding',
+    body: 'Waqt begins tracking immediately. Every 5 seconds it records which category your time falls into: typed, AI-assisted, pasted, or debugging.',
+  },
+  {
+    n: '03',
+    title: 'Optionally allow terminal tracking',
+    body: 'On first launch Waqt will ask if it can monitor terminal commands. Allow it to detect CLI tools like Claude Code and Gemini CLI. You can deny or revoke at any time via settings.',
+  },
+  {
+    n: '04',
+    title: 'Open the dashboard',
+    body: 'Run "Waqt: Show Dashboard" from the Command Palette (⌘⇧P). The dashboard adapts to your editor theme and shows today\'s split, a 30-day history, per-project stats, and AI tool breakdown.',
+  },
+];
+
+const settings = [
+  { key: 'waqt.aiTools', type: 'string[]', default: '[]', description: 'Additional VS Code extension IDs to recognize as AI tools.' },
+  { key: 'waqt.cliTools', type: 'object[]', default: '[]', description: 'Custom CLI patterns. Each entry needs a name and a regex pattern string.' },
+  { key: 'waqt.idleThresholdSeconds', type: 'number', default: '120', description: 'Seconds of inactivity before tracking pauses. Range: 30–600.' },
+  { key: 'waqt.cliTrackingConsent', type: 'string', default: '"ask"', description: 'Terminal monitoring consent: "ask", "allowed", or "denied".' },
+];
+
+const commands = [
+  { cmd: 'Waqt: Show Dashboard', desc: 'Opens the time-tracking dashboard in a webview panel.' },
+  { cmd: 'Waqt: Reset All Statistics', desc: 'Clears all accumulated data from global state. Irreversible.' },
+];
+---
+<Layout title="Usage" description="How to use Waqt — settings, commands, and terminal tracking setup.">
+  <Header />
+
+  <main class="max-w-3xl mx-auto px-6 py-16">
+
+    <h1 class="text-4xl font-bold mb-3 fade-up" style="color: var(--text);">Usage</h1>
+    <p class="mb-14 fade-up" style="color: var(--muted);">Getting started and configuring Waqt to fit your workflow.</p>
+
+    <!-- How it works -->
+    <section class="mb-16">
+      <h2 class="text-xl font-semibold mb-8 fade-up" style="color: var(--text);">How it works</h2>
+      <div class="flex flex-col gap-6">
+        {steps.map(step => (
+          <div class="fade-up flex gap-5">
+            <span class="text-3xl font-bold shrink-0 w-10 leading-none mt-0.5" style="color: var(--border);">{step.n}</span>
+            <div>
+              <h3 class="font-semibold mb-1 text-sm" style="color: var(--text);">{step.title}</h3>
+              <p class="text-sm leading-relaxed" style="color: var(--muted);">{step.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Settings -->
+    <section class="mb-16">
+      <h2 class="text-xl font-semibold mb-6 fade-up" style="color: var(--text);">Settings</h2>
+      <div class="fade-up rounded-xl border overflow-hidden" style="border-color: var(--border);">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr style="background: var(--surface2);">
+              <th class="text-left px-4 py-3 font-medium" style="color: var(--muted);">Key</th>
+              <th class="text-left px-4 py-3 font-medium" style="color: var(--muted);">Default</th>
+              <th class="text-left px-4 py-3 font-medium" style="color: var(--muted);">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {settings.map((s, i) => (
+              <tr style={`border-top: 1px solid var(--border); background: ${i % 2 === 0 ? 'var(--surface)' : 'transparent'};`}>
+                <td class="px-4 py-3 font-mono text-xs" style="color: var(--accent);">{s.key}</td>
+                <td class="px-4 py-3 font-mono text-xs" style="color: var(--muted);">{s.default}</td>
+                <td class="px-4 py-3 leading-relaxed" style="color: var(--muted);">{s.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Commands -->
+    <section class="mb-16">
+      <h2 class="text-xl font-semibold mb-6 fade-up" style="color: var(--text);">Commands</h2>
+      <div class="flex flex-col gap-3">
+        {commands.map(c => (
+          <div class="fade-up flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 rounded-lg px-4 py-3 border" style="background: var(--surface); border-color: var(--border);">
+            <code class="text-xs shrink-0 font-mono" style="color: var(--accent);">{c.cmd}</code>
+            <span class="text-sm" style="color: var(--muted);">{c.desc}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

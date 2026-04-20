@@ -1,0 +1,144 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const features = [
+  {
+    label: 'You Typed',
+    color: '#4ade80',
+    description: 'Keystrokes and edits you made directly — the time that is truly yours.',
+  },
+  {
+    label: 'AI Assisted',
+    color: '#a78bfa',
+    description: 'Time attributed to active AI extensions or CLI tools like Claude Code, Copilot, and Gemini CLI.',
+  },
+  {
+    label: 'Pasted / External',
+    color: '#fb923c',
+    description: 'Large insertions with no AI context detected — ChatBot copy-pastes and web snippets.',
+  },
+  {
+    label: 'Debugging',
+    color: '#f472b6',
+    description: 'Time spent in active debug sessions, isolated from coding time.',
+  },
+];
+
+const aiTools = [
+  'GitHub Copilot', 'Codeium', 'Tabnine', 'Continue',
+  'Supermaven', 'Amazon Q', 'Cody', 'Claude Dev',
+  'Claude Code', 'Gemini Code Assist', 'Cursor AI',
+];
+
+const editors = ['VS Code', 'Cursor', 'VSCodium', 'Windsurf', 'Positron', 'Antigravity'];
+---
+<Layout title="Home" description="Waqt — AI-aware coding time tracker. Know exactly how much you type vs AI assistance.">
+  <Header />
+
+  <main class="max-w-5xl mx-auto px-6">
+
+    <!-- Hero -->
+    <section class="pt-24 pb-20 text-center">
+      <div class="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full mb-8 border" style="color: var(--accent); border-color: var(--accent); opacity: 0.8;">
+        VS Code Extension
+      </div>
+      <h1 class="text-5xl sm:text-6xl font-bold tracking-tight mb-6 leading-tight" style="color: var(--text);">
+        Know your real<br />coding time
+      </h1>
+      <p class="text-lg max-w-xl mx-auto mb-10" style="color: var(--muted);">
+        Waqt tracks how much you type, how much AI writes, and how much you paste —
+        across VS Code, Cursor, and every fork.
+      </p>
+      <div class="flex items-center justify-center gap-4 flex-wrap">
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=gs-rumana.waqt"
+          target="_blank"
+          rel="noopener"
+          class="px-6 py-3 rounded-lg font-semibold text-sm transition-colors"
+          style="background: var(--accent); color: #fff;"
+        >
+          Install Free
+        </a>
+        <a
+          href="/usage"
+          class="px-6 py-3 rounded-lg font-semibold text-sm border transition-colors"
+          style="border-color: var(--border); color: var(--muted);"
+        >
+          How it works
+        </a>
+      </div>
+    </section>
+
+    <!-- Screenshot -->
+    <section class="fade-up mb-20">
+      <div class="rounded-xl overflow-hidden border" style="border-color: var(--border);">
+        <img
+          src="/images/screenshot.png"
+          alt="Waqt dashboard showing time split between typed, AI-assisted, and pasted"
+          class="w-full block"
+          loading="lazy"
+        />
+      </div>
+    </section>
+
+    <!-- 3-way split features -->
+    <section class="mb-20">
+      <h2 class="text-2xl font-semibold mb-2 fade-up" style="color: var(--text);">One dashboard. Four categories.</h2>
+      <p class="mb-10 fade-up" style="color: var(--muted);">Every second of coding time is classified automatically.</p>
+      <div class="grid sm:grid-cols-2 gap-4">
+        {features.map(f => (
+          <div class="fade-up rounded-xl p-6 border" style="background: var(--surface); border-color: var(--border);">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-2.5 h-2.5 rounded-full" style={`background: ${f.color};`}></span>
+              <span class="text-sm font-semibold" style="color: var(--text);">{f.label}</span>
+            </div>
+            <p class="text-sm leading-relaxed" style="color: var(--muted);">{f.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- AI Tools -->
+    <section class="mb-20">
+      <h2 class="text-2xl font-semibold mb-2 fade-up" style="color: var(--text);">Detects every AI tool</h2>
+      <p class="mb-8 fade-up" style="color: var(--muted);">Built-in detection for extensions and CLI tools. Add custom patterns in settings.</p>
+      <div class="fade-up flex flex-wrap gap-2">
+        {aiTools.map(tool => (
+          <span class="text-xs px-3 py-1.5 rounded-md border" style="background: var(--surface); border-color: var(--border); color: var(--muted);">
+            {tool}
+          </span>
+        ))}
+        <span class="text-xs px-3 py-1.5 rounded-md border" style="background: var(--surface); border-color: var(--border); color: var(--accent);">
+          + custom patterns
+        </span>
+      </div>
+    </section>
+
+    <!-- Editors -->
+    <section class="mb-20">
+      <h2 class="text-2xl font-semibold mb-2 fade-up" style="color: var(--text);">Works in every fork</h2>
+      <p class="mb-8 fade-up" style="color: var(--muted);">Auto-detects which editor you are running in and labels it accordingly.</p>
+      <div class="fade-up flex flex-wrap gap-2">
+        {editors.map(ed => (
+          <span class="text-xs px-3 py-1.5 rounded-md border" style="background: var(--surface); border-color: var(--border); color: var(--muted);">
+            {ed}
+          </span>
+        ))}
+      </div>
+    </section>
+
+    <!-- Privacy -->
+    <section class="fade-up mb-20 rounded-xl p-8 border" style="background: var(--surface); border-color: var(--border);">
+      <h2 class="text-xl font-semibold mb-3" style="color: var(--text);">All data stays local</h2>
+      <p style="color: var(--muted);">
+        Waqt stores everything in VS Code's GlobalState — on your machine only.
+        No servers, no analytics, no accounts. Terminal monitoring is opt-in and can be disabled at any time.
+      </p>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

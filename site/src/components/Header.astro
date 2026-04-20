@@ -1,0 +1,39 @@
+---
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/usage', label: 'Usage' },
+  { href: '/changelog', label: 'Changelog' },
+  { href: '/privacy', label: 'Privacy' },
+];
+const currentPath = Astro.url.pathname;
+---
+<header class="sticky top-0 z-50 border-b" style="background: var(--bg); border-color: var(--border);">
+  <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3 no-underline">
+      <img src="/favicon.svg" alt="Waqt" width="22" height="22" />
+      <span class="font-semibold tracking-wide text-sm" style="color: var(--text);">waqt</span>
+    </a>
+    <nav class="flex gap-6 text-sm">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class="transition-colors"
+          style={currentPath === link.href
+            ? 'color: var(--accent);'
+            : 'color: var(--muted);'}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+    <a
+      href="https://marketplace.visualstudio.com/items?itemName=gs-rumana.waqt"
+      target="_blank"
+      rel="noopener"
+      class="text-sm px-4 py-1.5 rounded-md font-medium transition-colors"
+      style="background: var(--accent); color: #fff;"
+    >
+      Install
+    </a>
+  </div>
+</header>

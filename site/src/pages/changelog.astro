@@ -1,0 +1,75 @@
+---
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
+import { marked } from 'marked';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const changelogPath = resolve(process.cwd(), '..', 'CHANGELOG.md');
+const raw = readFileSync(changelogPath, 'utf-8');
+const html = await marked.parse(raw);
+---
+<Layout title="Changelog" description="Waqt release history and what changed in each version.">
+  <Header />
+
+  <main class="max-w-3xl mx-auto px-6 py-16">
+    <h1 class="text-4xl font-bold mb-12 fade-up" style="color: var(--text);">Changelog</h1>
+    <div
+      class="fade-up prose-changelog"
+      set:html={html}
+    />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .prose-changelog :global(h2) {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .prose-changelog :global(h3) {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .prose-changelog :global(ul) {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .prose-changelog :global(li) {
+    font-size: 0.875rem;
+    color: var(--muted);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .prose-changelog :global(li)::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--border);
+  }
+  .prose-changelog :global(strong) {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .prose-changelog :global(p) {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+</style>

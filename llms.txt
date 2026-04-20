@@ -1,0 +1,21 @@
+# Waqt LLM Context Document
+
+> This document is intended to be read by AI Assistants working on the repository to provide context on architectural choices and system boundaries.
+
+## Architecture
+
+Waqt is standard VS Code extension tracking typing time and identifying how code was generated (Manual, AI Extension, AI CLI, or External Paste).
+
+### Key Modules:
+- **tracker.ts**: The core state machine and event accumulator logic. Exposes a `tick()` cycle every 5 seconds. Stores all state securely using `vscode.ExtensionContext.globalState` into a `waqt.data` key. Handles classification between typed, pasted, ai, and debug execution.
+- **dashboard.ts**: Generates the internal dashboard string HTML. Leverages native `--vscode-*` CSS hooks for visual styles, keeping the UI perfectly responsive towards user theme selections. No external UI frameworks are included.
+- **editorDetector.ts**: Contains URI/App naming logic to separate base VS Code from popular forks (Cursor, VSCodium, Antigravity).
+- **aiDetector.ts**: Polls `vscode.extensions.all` manually and handles `window.onDidStartTerminalShellExecution` lifecycle hooks for CLI AI executions.
+
+### Project Conventions
+- **Naming:** Extension ID scopes run on `waqt.*`.
+- **CSS:** Any newly added visual components should use standard VS Code theme variables (`var(--vscode-XXXX)`).
+- **Commands:** Commands should always trace back and map exactly inside of `package.json -> contributes -> commands`.
+
+### Development Flow
+Use `yarn run watch` or `npx tsc -watch` while developing. The project heavily relies on synchronous test patterns under `src/test/extension.test.ts`. Any complex calculation functions (like `pct` or threshold matching) must be pure functions with 100% test coverage.

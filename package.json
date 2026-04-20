@@ -1,0 +1,127 @@
+{
+  "name": "waqt",
+  "displayName": "Waqt",
+  "description": "Track coding time with AI tools detection — supports VS Code, Cursor, VSCodium, Antigravity, and more",
+  "version": "0.0.2",
+  "publisher": "gs-rumana",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gs-rumana/waqt"
+  },
+  "homepage": "https://waqt.gs-rumana.com",
+  "icon": "assets/waqt-logo.png",
+  "galleryBanner": {
+    "color": "#0c0c0e",
+    "theme": "dark"
+  },
+  "qna": "https://github.com/gs-rumana/waqt/issues",
+  "engines": {
+    "vscode": "^1.107.0"
+  },
+  "categories": [
+    "Other",
+    "Visualization"
+  ],
+  "keywords": [
+    "time tracking",
+    "coding time",
+    "AI tools",
+    "productivity",
+    "cursor",
+    "vscodium",
+    "copilot",
+    "claude",
+    "gemini"
+  ],
+  "extensionKind": [
+    "ui",
+    "workspace"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "waqt.showDashboard",
+        "title": "Waqt: Show Dashboard"
+      },
+      {
+        "command": "waqt.resetStats",
+        "title": "Waqt: Reset All Statistics"
+      }
+    ],
+    "configuration": {
+      "title": "Waqt",
+      "properties": {
+        "waqt.aiTools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Additional VS Code extension IDs to detect as AI tools (e.g. 'publisher.extensionName'). Built-in detection includes GitHub Copilot, Codeium, Tabnine, Continue, Supermaven, and more."
+        },
+        "waqt.cliTools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Display name for the CLI tool"
+              },
+              "pattern": {
+                "type": "string",
+                "description": "Regex pattern to match the terminal command"
+              }
+            },
+            "required": [
+              "name",
+              "pattern"
+            ]
+          },
+          "default": [],
+          "description": "Additional CLI tool patterns to detect in the integrated terminal. Each entry needs a 'name' and a regex 'pattern'."
+        },
+        "waqt.idleThresholdSeconds": {
+          "type": "number",
+          "default": 120,
+          "minimum": 30,
+          "maximum": 600,
+          "description": "Seconds of inactivity before tracking pauses (default: 120)."
+        },
+        "waqt.cliTrackingConsent": {
+          "type": "string",
+          "enum": [
+            "ask",
+            "allowed",
+            "denied"
+          ],
+          "default": "ask",
+          "description": "Whether Waqt is allowed to monitor terminal commands for AI CLI tools."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.107.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "typescript-eslint": "^8.56.1",
+    "eslint": "^9.39.3",
+    "typescript": "^5.9.3",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}

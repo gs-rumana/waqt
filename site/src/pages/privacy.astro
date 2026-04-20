@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout title="Privacy Policy" description="Waqt privacy policy — local-only data, no telemetry, opt-in terminal monitoring.">
+  <Header />
+
+  <main class="max-w-3xl mx-auto px-6 py-16">
+    <h1 class="text-4xl font-bold mb-3 fade-up" style="color: var(--text);">Privacy Policy</h1>
+    <p class="mb-12 text-sm fade-up" style="color: var(--muted);">Last updated: April 20, 2026</p>
+
+    <div class="flex flex-col gap-10">
+
+      <section class="fade-up">
+        <h2 class="text-lg font-semibold mb-3" style="color: var(--text);">Data storage</h2>
+        <p class="text-sm leading-relaxed" style="color: var(--muted);">
+          All data collected by Waqt is stored exclusively in VS Code's GlobalState API on your local machine.
+          No data is transmitted to any server, third-party service, or external system.
+        </p>
+      </section>
+
+      <section class="fade-up">
+        <h2 class="text-lg font-semibold mb-3" style="color: var(--text);">What is tracked</h2>
+        <p class="text-sm leading-relaxed mb-3" style="color: var(--muted);">
+          Waqt records time spent in each of the following categories for each file you edit:
+        </p>
+        <ul class="text-sm flex flex-col gap-1.5" style="color: var(--muted);">
+          <li>— Time spent actively typing</li>
+          <li>— Time attributed to AI extension activity</li>
+          <li>— Time attributed to large paste events</li>
+          <li>— Time spent in debug sessions</li>
+          <li>— Keystroke counts</li>
+        </ul>
+        <p class="text-sm mt-3 leading-relaxed" style="color: var(--muted);">
+          File paths are stored locally to provide per-file and per-project breakdowns.
+          No file content is ever read or stored.
+        </p>
+      </section>
+
+      <section class="fade-up">
+        <h2 class="text-lg font-semibold mb-3" style="color: var(--text);">Terminal monitoring</h2>
+        <p class="text-sm leading-relaxed" style="color: var(--muted);">
+          Waqt can optionally detect AI CLI tools (Claude Code, Gemini CLI, etc.) running in your integrated terminal.
+          This feature is disabled by default and requires explicit opt-in on first prompt.
+          When enabled, Waqt only inspects terminal command strings for pattern matches against known AI tool names.
+          Command output and arguments beyond the tool name are not read or stored.
+          You can revoke consent at any time by setting <code style="color: var(--accent);">waqt.cliTrackingConsent</code> to <code style="color: var(--accent);">"denied"</code> in settings.
+        </p>
+      </section>
+
+      <section class="fade-up">
+        <h2 class="text-lg font-semibold mb-3" style="color: var(--text);">Telemetry</h2>
+        <p class="text-sm leading-relaxed" style="color: var(--muted);">
+          Waqt collects no telemetry, crash reports, or usage analytics of any kind.
+        </p>
+      </section>
+
+      <section class="fade-up">
+        <h2 class="text-lg font-semibold mb-3" style="color: var(--text);">Data deletion</h2>
+        <p class="text-sm leading-relaxed" style="color: var(--muted);">
+          Run the command <code style="color: var(--accent);">Waqt: Reset All Statistics</code> from the Command Palette to permanently delete all stored data.
+          Uninstalling the extension also removes all associated GlobalState data.
+        </p>
+      </section>
+
+      <section class="fade-up">
+        <h2 class="text-lg font-semibold mb-3" style="color: var(--text);">Contact</h2>
+        <p class="text-sm leading-relaxed" style="color: var(--muted);">
+          Questions or concerns: open an issue on the
+          <a href="https://github.com/gs-rumana/waqt" target="_blank" rel="noopener" style="color: var(--accent);">GitHub repository</a>.
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
