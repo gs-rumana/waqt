@@ -3,7 +3,7 @@
   "displayName": "Waqt",
   "description": "Track coding time with AI tools detection — supports VS Code, Cursor, VSCodium, Antigravity, and more",
   "version": "0.0.2",
-  "publisher": "gsrumana",
+  "publisher": "gs-rumana",
   "license": "MIT",
   "repository": {
     "type": "git",
