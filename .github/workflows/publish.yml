@@ -27,11 +27,11 @@ jobs:
       - name: Run Tests
         run: xvfb-run -a yarn test
 
-      - name: Publish to VS Code Marketplace
-        uses: HaaLeo/publish-vscode-extension@v1
-        with:
-          pat: ${{ secrets.VSCE_PAT }}
-          registryUrl: https://marketplace.visualstudio.com
+      # - name: Publish to VS Code Marketplace
+      #   uses: HaaLeo/publish-vscode-extension@v1
+      #   with:
+      #     pat: ${{ secrets.VSCE_PAT }}
+      #     registryUrl: https://marketplace.visualstudio.com
 
       - name: Publish to Open VSX Registry
         uses: HaaLeo/publish-vscode-extension@v1
