@@ -9,11 +9,13 @@ const currentPath = Astro.url.pathname;
 ---
 <header class="sticky top-0 z-50 border-b" style="background: var(--bg); border-color: var(--border);">
   <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="/" class="flex items-center gap-3 no-underline">
+    <a href="/" class="flex items-center gap-3 no-underline shrink-0">
       <img src="/favicon.svg" alt="Waqt" width="22" height="22" />
       <span class="font-semibold tracking-wide text-sm" style="color: var(--text);">waqt</span>
     </a>
-    <nav class="flex gap-6 text-sm">
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex gap-6 text-sm">
       {navLinks.map(link => (
         <a
           href={link.href}
@@ -26,14 +28,53 @@ const currentPath = Astro.url.pathname;
         </a>
       ))}
     </nav>
-    <a
-      href="https://marketplace.visualstudio.com/items?itemName=gs-rumana.waqt"
-      target="_blank"
-      rel="noopener"
-      class="text-sm px-4 py-1.5 rounded-md font-medium transition-colors"
-      style="background: var(--accent); color: #fff;"
-    >
-      Install
-    </a>
+
+    <div class="flex items-center gap-4">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=gs-rumana.waqt"
+        target="_blank"
+        rel="noopener"
+        class="text-sm px-4 py-1.5 rounded-md font-medium transition-colors"
+        style="background: var(--accent); color: #fff;"
+      >
+        Install
+      </a>
+
+      <!-- Mobile Menu Toggle -->
+      <button
+        id="menu-toggle"
+        class="md:hidden p-1"
+        aria-label="Toggle Menu"
+        style="color: var(--muted);"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Nav -->
+  <div id="mobile-menu" class="hidden md:hidden border-t" style="border-color: var(--border); background: var(--surface);">
+    <nav class="flex flex-col p-6 gap-4 text-sm">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class="transition-colors"
+          style={currentPath === link.href
+            ? 'color: var(--accent);'
+            : 'color: var(--muted);'}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
   </div>
 </header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  toggle?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+</script>

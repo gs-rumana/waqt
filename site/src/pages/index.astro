@@ -40,30 +40,30 @@ const editors = ['VS Code', 'Cursor', 'VSCodium', 'Windsurf', 'Positron', 'Antig
   <main class="max-w-5xl mx-auto px-6">
 
     <!-- Hero -->
-    <section class="pt-24 pb-20 text-center">
-      <div class="inline-flex items-center gap-2 text-xs px-3 py-1 rounded-full mb-8 border" style="color: var(--accent); border-color: var(--accent); opacity: 0.8;">
+    <section class="pt-16 md:pt-24 pb-16 md:pb-20 text-center">
+      <div class="inline-flex items-center gap-2 text-[10px] md:text-xs px-3 py-1 rounded-full mb-6 md:mb-8 border" style="color: var(--accent); border-color: var(--accent); opacity: 0.8;">
         VS Code Extension
       </div>
-      <h1 class="text-5xl sm:text-6xl font-bold tracking-tight mb-6 leading-tight" style="color: var(--text);">
-        Know your real<br />coding time
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-tight" style="color: var(--text);">
+        Know your real<br class="hidden sm:block" />coding time
       </h1>
-      <p class="text-lg max-w-xl mx-auto mb-10" style="color: var(--muted);">
+      <p class="text-base md:text-lg max-w-xl mx-auto mb-10 px-4 md:px-0" style="color: var(--muted);">
         Waqt tracks how much you type, how much AI writes, and how much you paste —
         across VS Code, Cursor, and every fork.
       </p>
-      <div class="flex items-center justify-center gap-4 flex-wrap">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 px-6 sm:px-0">
         <a
           href="https://marketplace.visualstudio.com/items?itemName=gs-rumana.waqt"
           target="_blank"
           rel="noopener"
-          class="px-6 py-3 rounded-lg font-semibold text-sm transition-colors"
+          class="w-full sm:w-auto px-8 py-3 rounded-lg font-semibold text-sm transition-colors text-center"
           style="background: var(--accent); color: #fff;"
         >
           Install Free
         </a>
         <a
           href="/usage"
-          class="px-6 py-3 rounded-lg font-semibold text-sm border transition-colors"
+          class="w-full sm:w-auto px-8 py-3 rounded-lg font-semibold text-sm border transition-colors text-center"
           style="border-color: var(--border); color: var(--muted);"
         >
           How it works
@@ -102,8 +102,8 @@ const editors = ['VS Code', 'Cursor', 'VSCodium', 'Windsurf', 'Positron', 'Antig
 
     <!-- AI Tools -->
     <section class="mb-20">
-      <h2 class="text-2xl font-semibold mb-2 fade-up" style="color: var(--text);">Detects every AI tool</h2>
-      <p class="mb-8 fade-up" style="color: var(--muted);">Built-in detection for extensions and CLI tools. Add custom patterns in settings.</p>
+      <h2 class="text-xl md:text-2xl font-semibold mb-2 fade-up" style="color: var(--text);">Detects every AI tool</h2>
+      <p class="text-sm md:text-base mb-8 fade-up" style="color: var(--muted);">Built-in detection for extensions and CLI tools. Add custom patterns in settings.</p>
       <div class="fade-up flex flex-wrap gap-2">
         {aiTools.map(tool => (
           <span class="text-xs px-3 py-1.5 rounded-md border" style="background: var(--surface); border-color: var(--border); color: var(--muted);">

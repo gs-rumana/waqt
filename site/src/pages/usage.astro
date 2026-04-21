@@ -41,21 +41,21 @@ const commands = [
 <Layout title="Usage" description="How to use Waqt — settings, commands, and terminal tracking setup.">
   <Header />
 
-  <main class="max-w-3xl mx-auto px-6 py-16">
+  <main class="max-w-3xl mx-auto px-6 py-12 md:py-16">
 
-    <h1 class="text-4xl font-bold mb-3 fade-up" style="color: var(--text);">Usage</h1>
-    <p class="mb-14 fade-up" style="color: var(--muted);">Getting started and configuring Waqt to fit your workflow.</p>
+    <h1 class="text-3xl md:text-4xl font-bold mb-3 fade-up" style="color: var(--text);">Usage</h1>
+    <p class="text-sm md:text-base mb-14 fade-up" style="color: var(--muted);">Getting started and configuring Waqt to fit your workflow.</p>
 
     <!-- How it works -->
     <section class="mb-16">
       <h2 class="text-xl font-semibold mb-8 fade-up" style="color: var(--text);">How it works</h2>
-      <div class="flex flex-col gap-6">
+      <div class="flex flex-col gap-8">
         {steps.map(step => (
           <div class="fade-up flex gap-5">
-            <span class="text-3xl font-bold shrink-0 w-10 leading-none mt-0.5" style="color: var(--border);">{step.n}</span>
+            <span class="text-2xl md:text-3xl font-bold shrink-0 w-8 md:w-10 leading-none mt-0.5" style="color: var(--border);">{step.n}</span>
             <div>
-              <h3 class="font-semibold mb-1 text-sm" style="color: var(--text);">{step.title}</h3>
-              <p class="text-sm leading-relaxed" style="color: var(--muted);">{step.body}</p>
+              <h3 class="font-semibold mb-2 text-sm md:text-base" style="color: var(--text);">{step.title}</h3>
+              <p class="text-xs md:text-sm leading-relaxed" style="color: var(--muted);">{step.body}</p>
             </div>
           </div>
         ))}
@@ -65,8 +65,8 @@ const commands = [
     <!-- Settings -->
     <section class="mb-16">
       <h2 class="text-xl font-semibold mb-6 fade-up" style="color: var(--text);">Settings</h2>
-      <div class="fade-up rounded-xl border overflow-hidden" style="border-color: var(--border);">
-        <table class="w-full text-sm border-collapse">
+      <div class="fade-up rounded-xl border overflow-x-auto" style="border-color: var(--border);">
+        <table class="w-full text-xs md:text-sm border-collapse min-w-[600px]">
           <thead>
             <tr style="background: var(--surface2);">
               <th class="text-left px-4 py-3 font-medium" style="color: var(--muted);">Key</th>
@@ -77,14 +77,15 @@ const commands = [
           <tbody>
             {settings.map((s, i) => (
               <tr style={`border-top: 1px solid var(--border); background: ${i % 2 === 0 ? 'var(--surface)' : 'transparent'};`}>
-                <td class="px-4 py-3 font-mono text-xs" style="color: var(--accent);">{s.key}</td>
-                <td class="px-4 py-3 font-mono text-xs" style="color: var(--muted);">{s.default}</td>
+                <td class="px-4 py-3 font-mono text-[10px] md:text-xs" style="color: var(--accent);">{s.key}</td>
+                <td class="px-4 py-3 font-mono text-[10px] md:text-xs" style="color: var(--muted);">{s.default}</td>
                 <td class="px-4 py-3 leading-relaxed" style="color: var(--muted);">{s.description}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <p class="mt-3 text-[10px] text-center md:hidden" style="color: var(--muted);">← Swipe to view more →</p>
     </section>
 
     <!-- Commands -->
